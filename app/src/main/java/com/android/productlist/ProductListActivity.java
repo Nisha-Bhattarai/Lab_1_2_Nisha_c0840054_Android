@@ -1,6 +1,7 @@
 package com.android.productlist;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -13,6 +14,8 @@ import androidx.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,6 +51,19 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        // Define ColorDrawable object and parse color
+        // using parseColor method
+        // with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#4169e1"));
+
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
         //Initializing all Views and ViewGroups
         productLinearLayout = findViewById(R.id.productLinearLayout);
         addProductFAB = findViewById(R.id.addProductFAB);
@@ -65,7 +81,7 @@ public class ProductListActivity extends AppCompatActivity {
         System.out.println(productDB.productDao().getAll());
 
         productLinearLayout.setVisibility(View.VISIBLE);
-        getSupportActionBar().setTitle("Products"); // setting activity's appbar title
+        getSupportActionBar().setTitle("Product List"); // setting activity's appbar title
 
         loadProduct();
 
